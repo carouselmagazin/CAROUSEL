@@ -22,16 +22,24 @@ body, html {
   z-index: -1;
 }
 
-.logo-button {
+.logo-stack {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  z-index: 2;
+}
+
+.logo-button {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  z-index: 2;
 }
 
 .logo-button img {
@@ -44,6 +52,14 @@ body, html {
 .logo-button:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 4px;
+}
+
+.countdown {
+  color: #39ff14;
+  font-family: "Courier New", monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 8px #39ff14;
 }
 
 @keyframes logo-rotate {
