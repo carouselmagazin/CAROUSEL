@@ -37,7 +37,7 @@ body, html {
 
 .logo-overlap {
   position: relative;
-  width: 80vw;            /* Standard: auf kleinen Bildschirmen 70% der Breite */
+  width: 70vw;            /* Standard: auf kleinen Bildschirmen 70% der Breite */
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
@@ -46,7 +46,7 @@ body, html {
 /* Ab 700px Bildschirmbreite (z. B. Laptop) */
 @media (min-width: 700px) {
   .logo-overlap {
-    width: 60vw;          /* Nur noch 30% der Bildschirmbreite */
+    width: 50vw;          /* Nur noch 30% der Bildschirmbreite */
   }
 }
 
@@ -87,7 +87,20 @@ body, html {
   font-family: "Courier New", monospace;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
-  
+  white-space: normal;
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0%; /* keeps it above the nav bar with a small gap */
+  text-align: center;
+  z-index: 3;
+}
+@media (min-width: 1024px) {
+  .countdown {
+     bottom: 8%;
+   
+  }
 }
 
 @keyframes logo-rotate {
@@ -98,10 +111,98 @@ body, html {
 .content {
   position: relative;
   color: white;
-  text-align: center;
+  text-align: left;
   top: 40%;
   font-family: sans-serif;
 }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 5;
+  text-align: left;
+}
+
+.overlay.is-visible {
+  display: flex;
+}
+
+.overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+}
+
+.overlay__panel {
+  position: relative;
+  color: #fff;
+  padding: 24px 28px;
+  width: 100vw;
+  max-width: 100vw;
+  min-width: 280px;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* hide scrollbar in IE 10+ */
+  margin: 0;
+  z-index: 1;
+  text-align: left;
+}
+
+.overlay__panel::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@media (min-width: 900px) {
+  .overlay__panel {
+    width: 50vw;
+    max-width: 50vw;
+    min-width: 280px;
+    min-height: auto;
+    max-height: 90vh;
+    margin: 12px 18px 24px;
+  }
+}
+
+.overlay__panel h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  text-align: left;
+  font-size: 7vw;
+  color: #ff14cc;
+}
+@media (min-width: 900px) {
+.overlay__panel h2{
+  font-size: 3vw;
+}
+}
+
+.overlay__panel p {
+  margin: 0;
+  line-height: 1.4;
+  text-align: left;
+  font-style: italic;
+  font-size: 4vw;
+}
+@media (min-width: 900px) {
+.overlay__panel p{
+  font-size: 1.8vw;
+}
+}
+
+.overlay__panel a {
+  color: #fff;
+}
+
+
 
 .nav-bar {
   background-color: #00000000;
@@ -110,8 +211,8 @@ body, html {
   left: 0;
   right: 0;
   display: flex;
-  justify-content: center;
-  gap: 18px;
+  justify-content: space-evenly;
+  gap: 0;
   padding: 12px 18px;
   z-index: 3;
   font-family: "Times New Roman", Times, serif;
@@ -121,21 +222,21 @@ body, html {
 .nav-button {
   font-family: inherit;
   font-style: italic;
-  font-size: 1,5rem;
+  font-size: 1rem;
+  flex: 1 1 0;
+  text-align: center;
   letter-spacing: 0.08em;
   background: #00000000;
   color: #fff;
   border: none;
   padding: 8px 14px;
   cursor: pointer;
-  /* Ab 700px Bildschirmbreite (z. B. Laptop) */
-@media (min-width: 700px) {
-  .nav-button {
-    font-size: 2rem;          /* Nur noch 30% der Bildschirmbreite */
-  }
 }
-  
 
+@media (min-width: 1024px) {
+  .nav-button {
+    font-size: 1.5rem;
+  }
 }
 
 .nav-button:hover,
@@ -143,4 +244,6 @@ body, html {
   background: transparent;
   color: #ff14cc;
   outline: none;
+  font-family: "Times New Roman", Times, serif;
+  font-style: normal;
 }

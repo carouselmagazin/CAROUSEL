@@ -55,8 +55,46 @@ const renderCountdown = () => {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  countdownEl.textContent = `Open call opening in (${padTime(days)}d.${padTime(hours)}h.${padTime(minutes)}m.${padTime(seconds)}s)`;
+  countdownEl.innerHTML = `CALL FOR ENTRIES opening<br>(${padTime(days)}d.${padTime(hours)}h.${padTime(minutes)}m.${padTime(seconds)}s)`;
 };
 
 const countdownTimer = setInterval(renderCountdown, 1000);
 renderCountdown();
+
+// Overlay handling for nav buttons.
+const overlays = Array.from(document.querySelectorAll(".overlay"));
+const navButtons = document.querySelectorAll(".nav-button[data-overlay]");
+
+const closeAllOverlays = () => {
+  overlays.forEach((overlay) => {
+    overlay.classList.remove("is-visible");
+    overlay.setAttribute("aria-hidden", "true");
+  });
+};
+
+navButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const targetId = button.getAttribute("data-overlay");
+    const targetOverlay = document.getElementById(targetId);
+    if (!targetOverlay) return;
+    closeAllOverlays();
+    targetOverlay.classList.add("is-visible");
+    targetOverlay.setAttribute("aria-hidden", "false");
+  });
+});
+
+overlays.forEach((overlay) => {
+  overlay.addEventListener("click", (event) => {
+    const isBackdrop = event.target.classList.contains("overlay__backdrop");
+    const isClose = event.target.hasAttribute("data-overlay-close");
+    if (isBackdrop || isClose) {
+      closeAllOverlays();
+    }
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeAllOverlays();
+  }
+});
