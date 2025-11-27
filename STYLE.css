@@ -43,6 +43,10 @@ body, html {
   place-items: center;
 }
 
+.logo-overlap > * {
+  grid-area: 1 / 1;
+}
+
 /* Ab 700px Bildschirmbreite (z. B. Laptop) */
 @media (min-width: 700px) {
   .logo-overlap {
@@ -63,13 +67,16 @@ body, html {
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
+  cursor: default;
+  width: 100%;
+  height: 100%;
 }
 
 .logo-button img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   animation: logo-rotate 10s linear infinite;
 }
 
