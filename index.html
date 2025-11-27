@@ -10,11 +10,18 @@
     <video id="bgVideo" autoplay muted playsinline></video>
 
     <div class="logo-stack">
-      <button class="logo-button" aria-label="Logo button">
-        <img src="IMG/LOGO_whit_TR.png" alt="Logo" />
-      </button>
+      <div class="logo-overlap">
+        <button class="logo-button logo-outer" aria-label="Outer logo button">
+          <img src="IMG/CAROUSEL KREIS_Außen.png" alt="Logo" />
+        </button>
+        <div class="logo-stack_2">
+          <button class="logo-button logo-inner" aria-label="Inner logo button">
+            <img src="IMG/CAROUSEL KREIS_INNEN.png" alt="Logo" />
+          </button>
+        </div>
+      </div>
       <div id="countdown" class="countdown" aria-live="polite">
-        Open call opening in (00.00.00)
+        Open call opening in <br> (00.00.00)
       </div>
     </div>
 
@@ -22,6 +29,12 @@
       <h1></h1>
       <p></p>
     </div>
+
+    <nav class="nav-bar" aria-label="Main navigation">
+      <button class="nav-button" type="button">INFO</button>
+      <button class="nav-button" type="button">>>CALL FOR ENTRIES<<</button>
+      <button class="nav-button" type="button">CONTACT</button>
+    </nav>
 
     <script src="LOGIC.js" defer></script>
   </body>

@@ -23,7 +23,7 @@ body, html {
 }
 
 .logo-stack {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -35,6 +35,30 @@ body, html {
   z-index: 2;
 }
 
+.logo-overlap {
+  position: relative;
+  width: 80vw;            /* Standard: auf kleinen Bildschirmen 70% der Breite */
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Ab 700px Bildschirmbreite (z. B. Laptop) */
+@media (min-width: 700px) {
+  .logo-overlap {
+    width: 60vw;          /* Nur noch 30% der Bildschirmbreite */
+  }
+}
+
+.logo-stack_2 {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+}
+
+
 .logo-button {
   background: none;
   border: none;
@@ -44,9 +68,13 @@ body, html {
 
 .logo-button img {
   display: block;
-  width: 20vw;
+  width: 100%;
   height: auto;
   animation: logo-rotate 10s linear infinite;
+}
+
+.logo-inner img {
+  animation-duration: 18s;
 }
 
 .logo-button:focus-visible {
@@ -55,11 +83,11 @@ body, html {
 }
 
 .countdown {
-  color: #39ff14;
+  color: #ff14cc;
   font-family: "Courier New", monospace;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
-  text-shadow: 0 0 8px #39ff14;
+  
 }
 
 @keyframes logo-rotate {
@@ -73,4 +101,46 @@ body, html {
   text-align: center;
   top: 40%;
   font-family: sans-serif;
+}
+
+.nav-bar {
+  background-color: #00000000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding: 12px 18px;
+  z-index: 3;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+}
+
+.nav-button {
+  font-family: inherit;
+  font-style: italic;
+  font-size: 1,5rem;
+  letter-spacing: 0.08em;
+  background: #00000000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  /* Ab 700px Bildschirmbreite (z. B. Laptop) */
+@media (min-width: 700px) {
+  .nav-button {
+    font-size: 2rem;          /* Nur noch 30% der Bildschirmbreite */
+  }
+}
+  
+
+}
+
+.nav-button:hover,
+.nav-button:focus-visible {
+  background: transparent;
+  color: #ff14cc;
+  outline: none;
 }
