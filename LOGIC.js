@@ -65,7 +65,7 @@ const renderCountdown = () => {
   const seconds = totalSeconds % 60;
 
   setCountdownContent(
-    `CALL FOR ENTRIES opening<br>(${padTime(days)}d.${padTime(hours)}h.${padTime(minutes)}m.${padTime(seconds)}s)`
+    `CALL FOR ENTRIES OPENING<br>(${padTime(days)}d.${padTime(hours)}h.${padTime(minutes)}m.${padTime(seconds)}s)`
   );
 };
 
