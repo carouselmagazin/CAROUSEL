@@ -53,7 +53,7 @@ const renderCountdown = () => {
   const diffMs = openCallDate - now;
 
   if (diffMs <= 0) {
-    setCountdownContent("Open call now open");
+    setCountdownContent("Call for entries now open");
     if (countdownTimer) clearInterval(countdownTimer);
     return;
   }
