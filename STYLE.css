@@ -1,25 +1,27 @@
 ﻿body {
   margin: 0;
   min-height: 100vh;
-  background: #000;
+  background-color: #abd411;
+  background-image: url("IMG/BACKPLATE.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  font-family: "Times New Roman", Times, serif;
 }
 
-/* Make the video fill the screen */
+body.overlay-open {
+  background-image: none;
+  background-color: rgb(204, 255, 0);
+}
+
+/* Base layout sizing */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden;
-}
-
-#bgVideo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
 }
 
 .logo-stack {
@@ -36,11 +38,7 @@ body, html {
 }
 
 .logo-overlap {
-  position: relative;
-  width: 70vw;            /* Standard: auf kleinen Bildschirmen 70% der Breite */
-  aspect-ratio: 1 / 1;
-  display: grid;
-  place-items: center;
+  display: none; /* Hide stacked logo */
 }
 
 .logo-overlap > * {
@@ -77,11 +75,6 @@ body, html {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  animation: logo-rotate 10s linear infinite;
-}
-
-.logo-inner img {
-  animation-duration: 18s;
 }
 
 .logo-button:focus-visible {
@@ -90,7 +83,7 @@ body, html {
 }
 
 .countdown {
-  color: #abd411;
+  color: #fff;
   font-family: "Times New Roman", Times;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
@@ -110,17 +103,12 @@ body, html {
   }
 }
 
-@keyframes logo-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .content {
   position: relative;
-  color: white;
+  color: #fff;
   text-align: left;
   top: 40%;
-  font-family: sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .overlay {
@@ -129,6 +117,7 @@ body, html {
   display: none;
   align-items: flex-start;
   justify-content: flex-start;
+  overflow-y: auto;
   z-index: 5;
   text-align: left;
 }
@@ -146,37 +135,16 @@ body, html {
 
 .overlay__panel {
   position: relative;
-  color: #abd411;
+  color: #fff;
   padding: 24px 28px 10vh;
   background: transparent;
   width: 100vw;
   max-width: 100vw;
   min-width: 280px;
-  min-height: 90vh;
-  max-height: 90vh;
   box-sizing: border-box;
-  overflow-y: auto;
-  scrollbar-width: none; /* hide scrollbar in Firefox */
-  -ms-overflow-style: none; /* hide scrollbar in IE 10+ */
   margin: 0;
   z-index: 1;
   text-align: left;
-}
-
-.overlay__panel::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-@media (min-width: 900px) {
-  .overlay__panel {
-    width: 50vw;
-    max-width: 50vw;
-    min-width: 280px;
-    min-height: 90vh;
-    max-height: 90vh;
-    margin: 12px 18px 24px;
-  }
 }
 
 .overlay__panel h2 {
@@ -186,7 +154,7 @@ body, html {
   font-style: italic;
   text-align: left;
   font-size: 7vw;
-  color: #abd411;
+  color: #fff;
 }
 @media (min-width: 900px) {
 .overlay__panel h2{
@@ -194,9 +162,35 @@ body, html {
 }
 }
 
+#call-overlay .overlay__panel h2 {
+  font-size: 4.3vw;
+}
+@media (min-width: 900px) {
+  #call-overlay .overlay__panel h2 {
+    font-size: 1.62vw;
+  }
+}
+
+#contact-overlay .overlay__panel {
+  text-align: right;
+  width: 500px;
+  max-width: 100%;
+  margin-left: auto;
+}
+
+#contact-overlay .overlay__panel h2 {
+  text-align: right;
+  font-size: 5vw;
+}
+@media (min-width: 900px) {
+  #contact-overlay .overlay__panel h2 {
+    font-size: 2vw;
+  }
+}
+
 .overlay__panel p {
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.25;
   text-align: left;
   font-style: italic;
   font-size: 4vw;
@@ -208,12 +202,31 @@ body, html {
 }
 }
 
+#call-overlay .overlay__panel p {
+  font-size: 2.15vw;
+}
+@media (min-width: 900px) {
+  #call-overlay .overlay__panel p {
+    font-size: 0.97vw;
+  }
+}
+
+#contact-overlay .overlay__panel p {
+  text-align: right;
+  font-size: 2.4vw;
+}
+@media (min-width: 900px) {
+  #contact-overlay .overlay__panel p {
+    font-size: 1.05vw;
+  }
+}
+
 .overlay__content {
-  color: #abd411;
+  color: #fff;
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
   font-size: 3vw;
-  line-height: 1.5;
+  line-height: 1.3;
 }
 
 @media (min-width: 900px) {
@@ -222,12 +235,51 @@ body, html {
   }
 }
 
+#call-overlay .overlay__content {
+  font-size: 1.85vw;
+}
+@media (min-width: 900px) {
+  #call-overlay .overlay__content {
+    font-size: 0.76vw;
+  }
+}
+
+.overlay__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .overlay__columns {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+  }
+}
+
+.overlay__column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.overlay__subheading {
+  letter-spacing: 0.08em;
+  display: inline-block; /* keep background tight to text */
+}
+
 .overlay__text {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
   display: inline;
-  padding: 0;
+  padding: 0.05em 0.18em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+.overlay__text:empty {
+  background: none;
+  padding: 0;
 }
 
 .overlay__countdown {
@@ -236,7 +288,7 @@ body, html {
   letter-spacing: 0.08em;
   line-height: 1.4;
   font-size: 4vw;
-  color: #abd411;
+  color: #fff;
 }
 
 @media (min-width: 900px) {
@@ -245,8 +297,17 @@ body, html {
   }
 }
 
+#call-overlay .overlay__countdown {
+  font-size: 2.46vw;
+}
+@media (min-width: 900px) {
+  #call-overlay .overlay__countdown {
+    font-size: 0.86vw;
+  }
+}
+
 .overlay__panel a {
-  color: #abd411;
+  color: #fff;
 }
 
 
@@ -270,7 +331,7 @@ body, html {
 .nav-button {
   font-family: inherit;
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.5rem;
   flex: 1 1 0;
   text-align: center;
   letter-spacing: 0.08em;
@@ -281,17 +342,39 @@ body, html {
   cursor: pointer;
 }
 
+.nav-button[data-overlay="call-overlay"] {
+  font-size: 1.95rem; /* 30% larger than base 1.5rem */
+}
+
 @media (min-width: 1024px) {
   .nav-button {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-button[data-overlay="call-overlay"] {
+    font-size: 2.6rem; /* 30% larger than base 2rem */
   }
 }
 
 .nav-button:hover,
 .nav-button:focus-visible {
   background: transparent;
-  color: #abd411;
+  color: #fff;
   outline: none;
   font-family: "Times New Roman", Times, serif;
   font-style: normal;
+}
+
+.nav-button.is-active {
+  color: #fff;
+}
+
+body.overlay-open .nav-button {
+  color: rgb(211, 235, 235); /* CMYK(10,0,0,8) */
+}
+
+body.overlay-open .nav-button.is-active {
+  color: #fff;
 }
