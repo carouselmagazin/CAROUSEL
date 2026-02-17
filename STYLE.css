@@ -343,6 +343,26 @@ body, html {
   font-size: 1.56rem; /* 30% larger than base 1.2rem */
 }
 
+@media (max-width: 700px) {
+  .nav-bar {
+    padding: 10px 8px;
+  }
+
+  .nav-button {
+    font-size: 0.95rem;
+    padding: 6px 6px;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .nav-button[data-overlay="call-overlay"] {
+    font-size: 1.2rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .nav-button {
     font-size: 2rem;
