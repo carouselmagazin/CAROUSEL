@@ -20,7 +20,7 @@ const renderCountdown = () => {
   const diffMs = openCallDate - now;
 
   if (diffMs <= 0) {
-    setCountdownContent("Call for entries now open");
+    setCountdownContent("Call for entries is closed - We are currently reviewing your submissions and will get back to you soon!");
     if (countdownTimer) clearInterval(countdownTimer);
     return;
   }
