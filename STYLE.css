@@ -328,7 +328,7 @@ body, html {
 .nav-button {
   font-family: "Helvetica", Arial, sans-serif;
   font-style: normal;
-  font-size: 1.2rem;
+  font-size: clamp(0.85rem, 3.2vw, 1.2rem);
   flex: 1 1 0;
   text-align: center;
   letter-spacing: 0.08em;
@@ -340,7 +340,7 @@ body, html {
 }
 
 .nav-button[data-overlay="call-overlay"] {
-  font-size: 1.56rem; /* 30% larger than base 1.2rem */
+  font-size: clamp(1.1rem, 4.2vw, 1.56rem); /* 30% larger than base */
 }
 
 @media (max-width: 700px) {
@@ -349,7 +349,6 @@ body, html {
   }
 
   .nav-button {
-    font-size: 0.95rem;
     padding: 6px 6px;
     letter-spacing: 0.05em;
     line-height: 1.1;
@@ -359,7 +358,6 @@ body, html {
   }
 
   .nav-button[data-overlay="call-overlay"] {
-    font-size: 1.2rem;
   }
 }
 
