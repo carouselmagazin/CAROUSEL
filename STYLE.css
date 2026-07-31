@@ -26,7 +26,8 @@ body, html {
   pointer-events: none;
 }
 
-/* Animated backplate background */
+/* Animated backplate background - vertical scroll on web, rotated
+   horizontal scroll on mobile (see the portrait media query below). */
 .backplate {
   position: fixed;
   inset: 0;
@@ -84,11 +85,32 @@ body.overlay-open .backplate {
   }
 }
 
-/* Mobile / vertical screens: keep the backplate static */
+/* Mobile / vertical screens: rotate the poster 90deg counter-clockwise so
+   it reads sideways, then scroll it right to left. Rotating .backplate as a
+   rigid whole keeps every hotspot correctly aligned to its name. */
 @media (orientation: portrait) {
+  .backplate {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: 100vh;
+    height: 100vw;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    transform-origin: center center;
+  }
+
   .backplate__track {
-    animation: none;
-    transform: none;
+    animation-name: backplate-scroll-mobile;
+  }
+}
+
+@keyframes backplate-scroll-mobile {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
   }
 }
 
