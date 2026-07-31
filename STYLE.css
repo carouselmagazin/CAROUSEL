@@ -1,4 +1,10 @@
-﻿body {
+﻿:root {
+  /* Reserved space so scrollable overlay text never ends up hidden behind
+     the fixed nav bar; generous enough to cover its tallest (desktop) size. */
+  --nav-bar-clearance: 120px;
+}
+
+body {
   margin: 0;
   min-height: 100vh;
   background-color: rgb(180, 255, 0);
@@ -117,7 +123,10 @@ body.overlay-open .backplate {
 /* Lightweight text-only panel shown when a background name is clicked */
 .name-panel {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: var(--nav-bar-clearance);
   display: none;
   align-items: center;
   justify-content: center;
@@ -136,11 +145,17 @@ body.overlay-open .backplate {
   font-family: "Helvetica", Arial, sans-serif;
   color: #000;
   max-width: 640px;
-  max-height: 80vh;
+  max-height: min(80vh, calc(100vh - 48px - var(--nav-bar-clearance)));
   overflow-y: auto;
   text-align: left;
   cursor: auto;
   pointer-events: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.name-panel__text::-webkit-scrollbar {
+  display: none;
 }
 
 .name-panel__name {
@@ -261,17 +276,54 @@ body.overlay-open .backplate {
 
 .overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: var(--nav-bar-clearance);
   display: none;
   align-items: flex-start;
   justify-content: flex-start;
   overflow-y: auto;
   z-index: 5;
   text-align: left;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overlay::-webkit-scrollbar {
+  display: none;
 }
 
 .overlay.is-visible {
   display: flex;
+}
+
+/* Custom scroll indicator replacing the native scrollbar: a small dot that
+   travels top to bottom along the right edge as the open panel scrolls. */
+.scroll-indicator {
+  position: fixed;
+  top: 24px;
+  right: 8px;
+  bottom: var(--nav-bar-clearance);
+  width: 30px;
+  z-index: 6;
+  pointer-events: none;
+  display: none;
+}
+
+.scroll-indicator.is-visible {
+  display: block;
+}
+
+.scroll-indicator__dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(191, 255, 166);
+  transform: translate(-50%, 0);
 }
 
 .overlay__backdrop {
@@ -284,7 +336,7 @@ body.overlay-open .backplate {
 .overlay__panel {
   position: relative;
   color: #fff;
-  padding: 24px 28px 10vh;
+  padding: 24px 28px 40px;
   background: transparent;
   width: 100vw;
   max-width: 100vw;
@@ -549,6 +601,10 @@ body.overlay-open .nav-bar {
   font-style: italic;
 }
 
+/* The active nav button is only ever active while its overlay is open, and
+   opening an overlay applies filter:invert(1) to the whole .nav-bar - so we
+   pre-invert this color, making the rendered (post-filter) result the
+   intended rgb(191, 255, 166) green instead of its inverted complement. */
 .nav-button.is-active {
-  color: #000;
+  color: rgb(64, 0, 89);
 }
