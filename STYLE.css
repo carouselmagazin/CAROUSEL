@@ -298,34 +298,6 @@ body.overlay-open .backplate {
   display: flex;
 }
 
-/* Custom scroll indicator replacing the native scrollbar: a small dot that
-   travels top to bottom along the right edge as the open panel scrolls. */
-.scroll-indicator {
-  position: fixed;
-  top: 24px;
-  right: 8px;
-  bottom: var(--nav-bar-clearance);
-  width: 30px;
-  z-index: 6;
-  pointer-events: none;
-  display: none;
-}
-
-.scroll-indicator.is-visible {
-  display: block;
-}
-
-.scroll-indicator__dot {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: rgb(191, 255, 166);
-  transform: translate(-50%, 0);
-}
-
 .overlay__backdrop {
   position: fixed;
   inset: 0;
@@ -410,7 +382,7 @@ body.overlay-open .backplate {
 }
 @media (min-width: 900px) {
   #call-overlay .overlay__panel p {
-    font-size: 0.97vw;
+    font-size: 0.93vw;
   }
 }
 
@@ -443,7 +415,7 @@ body.overlay-open .backplate {
 }
 @media (min-width: 900px) {
   #call-overlay .overlay__content {
-    font-size: 0.76vw;
+    font-size: 0.8vw;
   }
 }
 

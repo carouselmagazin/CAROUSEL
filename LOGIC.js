@@ -41,41 +41,6 @@ if (countdownTargets.length) {
   renderCountdown();
 }
 
-// Custom scroll indicator (replaces the native scrollbar): a dot that
-// travels top to bottom along the right edge, tracking whichever scrollable
-// panel is currently open (a main overlay or the name/bio popup).
-const scrollIndicator = document.getElementById("scroll-indicator");
-const scrollIndicatorDot = scrollIndicator?.querySelector(".scroll-indicator__dot");
-let scrollIndicatorSource = null;
-
-const updateScrollIndicator = () => {
-  if (!scrollIndicator || !scrollIndicatorDot || !scrollIndicatorSource) return;
-  const scrollable = scrollIndicatorSource.scrollHeight - scrollIndicatorSource.clientHeight;
-  if (scrollable <= 1) {
-    scrollIndicator.classList.remove("is-visible");
-    return;
-  }
-  scrollIndicator.classList.add("is-visible");
-  const ratio = scrollIndicatorSource.scrollTop / scrollable;
-  const trackHeight = scrollIndicator.clientHeight - scrollIndicatorDot.clientHeight;
-  scrollIndicatorDot.style.top = `${ratio * trackHeight}px`;
-};
-
-const bindScrollIndicator = (source) => {
-  if (scrollIndicatorSource) {
-    scrollIndicatorSource.removeEventListener("scroll", updateScrollIndicator);
-  }
-  scrollIndicatorSource = source;
-  if (source) {
-    source.addEventListener("scroll", updateScrollIndicator);
-    updateScrollIndicator();
-  } else if (scrollIndicator) {
-    scrollIndicator.classList.remove("is-visible");
-  }
-};
-
-window.addEventListener("resize", updateScrollIndicator);
-
 // Overlay handling for nav buttons.
 const overlays = Array.from(document.querySelectorAll(".overlay"));
 const navButtons = document.querySelectorAll(".nav-button[data-overlay]");
@@ -87,7 +52,6 @@ const closeAllOverlays = () => {
   });
   navButtons.forEach((btn) => btn.classList.remove("is-active"));
   document.body.classList.remove("overlay-open");
-  bindScrollIndicator(null);
 };
 
 navButtons.forEach((button) => {
@@ -101,7 +65,6 @@ navButtons.forEach((button) => {
     navButtons.forEach((btn) => btn.classList.remove("is-active"));
     button.classList.add("is-active");
     document.body.classList.add("overlay-open");
-    bindScrollIndicator(targetOverlay);
   });
 });
 
@@ -323,14 +286,12 @@ const showNamePanel = (spot) => {
 
   namePanel.classList.add("is-visible");
   namePanel.setAttribute("aria-hidden", "false");
-  bindScrollIndicator(namePanelText);
 };
 
 const hideNamePanel = () => {
   if (!namePanel) return;
   namePanel.classList.remove("is-visible");
   namePanel.setAttribute("aria-hidden", "true");
-  bindScrollIndicator(null);
 };
 
 document.querySelectorAll(".backplate__page").forEach((page) => {
