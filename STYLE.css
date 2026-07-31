@@ -2,6 +2,10 @@
   /* Reserved space so scrollable overlay text never ends up hidden behind
      the fixed nav bar; generous enough to cover its tallest (desktop) size. */
   --nav-bar-clearance: 120px;
+  /* .site-logo's own top offset + its rendered height (width / its 4167:1053
+     aspect ratio) + a small gap, so anything anchored to this always starts
+     just below the logo, at the same height, on every screen size. */
+  --logo-clearance: calc(24px + (min(60vw, 320px) / 3.957) + 20px);
 }
 
 body {
@@ -128,11 +132,11 @@ body.overlay-open .backplate {
   right: 0;
   bottom: var(--nav-bar-clearance);
   display: none;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 4;
   pointer-events: none;
-  padding: 24px;
+  padding: var(--logo-clearance) 24px 24px;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -145,8 +149,11 @@ body.overlay-open .backplate {
   font-family: "Helvetica", Arial, sans-serif;
   color: #000;
   max-width: 640px;
-  max-height: min(80vh, calc(100vh - 48px - var(--nav-bar-clearance)));
+  max-height: calc(100vh - var(--logo-clearance) - 24px - var(--nav-bar-clearance));
+  min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   text-align: left;
   cursor: auto;
   pointer-events: auto;
@@ -546,9 +553,6 @@ body.overlay-open .nav-bar {
     min-width: 0;
     white-space: normal;
     overflow-wrap: anywhere;
-  }
-
-  .nav-button[data-overlay="call-overlay"] {
   }
 }
 
